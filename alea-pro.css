@@ -1,0 +1,25 @@
+/* ALÉA: experiencia de cuidado personal */
+#alea-pro{position:fixed;inset:0;z-index:90;background:#f9f3fb;overflow:auto;font-family:system-ui,-apple-system,sans-serif;color:#34223d}#alea-pro[hidden]{display:none}
+#alea-pro .ap-shell{max-width:520px;margin:auto;min-height:100%;padding:25px 20px 55px;background:linear-gradient(160deg,#fffafb,#f2e9f9)}
+#alea-pro .ap-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:27px}
+#alea-pro .ap-kicker{font-size:11px;letter-spacing:2.4px;color:#8b65a8;font-weight:800}#alea-pro h1{font-size:29px;line-height:1.17;margin:8px 0 10px;color:#412b4b}#alea-pro p{font-size:14px;color:#86778c}
+#alea-pro .ap-progress{display:flex;gap:5px;margin-bottom:24px}#alea-pro .ap-progress i{flex:1;height:5px;background:#e8dbea;border-radius:9px}#alea-pro .ap-progress i.on{background:#8152a4}
+#alea-pro .ap-option{background:white;border:1.5px solid #ebe0ee;border-radius:15px;padding:13px 15px;margin:7px 0;font-size:14px;font-weight:650;cursor:pointer;text-align:left;width:100%;color:#46304f;display:block}
+#alea-pro .ap-option.selected{border-color:#8051a5;background:#f4ebfa;color:#65358d}#alea-pro .ap-option:focus-visible{outline:3px solid #b98dd9}
+#alea-pro .ap-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#alea-pro label{font-weight:650;font-size:14px;display:block;margin:11px 0 7px}
+#alea-pro .ap-control{width:100%;padding:12px;background:white;border:1px solid #e6d7ec;border-radius:12px;color:#35213f}
+#alea-pro .ap-actions{display:flex;gap:10px;margin-top:23px}#alea-pro .ap-primary{background:#76469d;color:white;border:0;border-radius:15px;padding:14px 18px;font-weight:750;flex:1;cursor:pointer}#alea-pro .ap-secondary{background:white;color:#69438a;border:1px solid #d7bfdf;border-radius:15px;padding:14px 18px;font-weight:750;cursor:pointer}
+#alea-pro .ap-consent{display:flex;gap:10px;padding:12px;border-radius:12px;background:#fff;border:1px solid #e8ddeb;align-items:flex-start}
+#alea-pro input[type=checkbox]{width:20px;height:20px;accent-color:#72459b;flex-shrink:0}
+#alea-smart{margin:12px 0 24px}#alea-smart .as-label{font-size:12px;color:#795c8e;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;margin:12px 0}
+#alea-smart .as-panel{background:white;border:1px solid #f0e5f2;border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 8px 24px #4a245409}
+#alea-smart .as-product{display:flex;gap:12px;align-items:center;margin:10px 0;padding:13px;background:white;border:1px solid #eddfed;border-radius:16px}
+#alea-smart .as-thumb{height:80px;width:80px;flex-shrink:0;object-fit:contain;border-radius:12px;background:#f9f4fb;padding:6px}
+#alea-smart .as-placeholder{height:80px;width:80px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;background:#eee2f6;color:#8450a3;font-size:30px}
+#alea-smart .as-details{flex:1;min-width:0}#alea-smart .as-details b{font-size:14px;display:block}#alea-smart .as-details p{font-size:12px;margin:5px 0;color:#807288}
+#alea-smart .as-price{font-weight:800;color:#703e92}#alea-smart .as-verify{color:#8a6d8f;font-size:11px}
+#alea-smart .as-buy{font-size:12px;color:#74419b;font-weight:800;text-decoration:underline}
+#alea-smart .as-chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}#alea-smart .as-chip{border-radius:30px;padding:8px 11px;border:1px solid #d9c1e7;background:#fff;color:#72429b;font-size:12px;cursor:pointer}#alea-smart .as-chip.selected{background:#74429c;color:white}
+#alea-smart .as-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}#alea-smart .as-day{border:0;border-radius:10px;height:39px;font-size:12px;background:#f8f2fb;color:#493656;position:relative}#alea-smart .as-day.period{background:#f8c8da}#alea-smart .as-day.fertile{background:#e3d4f2}#alea-smart .as-day.ovulation{outline:2px solid #a17dc9}#alea-smart .as-day.active{background:#71429b;color:white}#alea-smart .as-day.today{font-weight:900}
+#alea-smart .as-note{font-size:12px;color:#816b89;line-height:1.4}#alea-smart .as-warning{border-radius:12px;background:#fff1e6;padding:12px;font-size:12px;color:#775234}#alea-smart .as-good{background:#e9f5ef;border-radius:12px;padding:12px;color:#315943;font-size:12px}
+#alea-smart input,#alea-smart select{accent-color:#7a4caa}

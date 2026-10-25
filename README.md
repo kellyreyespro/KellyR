@@ -9,6 +9,30 @@
 
 </div>
 
+
+## 💜 ALÉA · cuidado personal personalizado
+
+La aplicación principal está en **[care.html](https://kellyreyespro.github.io/KellyR/care.html)**. Ya incluye cuestionario de piel, cabello, porosidad, frizz, sensibilidad bucal, cuidado del cuerpo, desmaquillado, presupuesto, preferencia menstrual y país. Los datos de las cuentas se conservan solo después de aplicar las nuevas tablas privadas.
+
+**Antes de utilizar el diario con usuarias reales** ejecuta el archivo [SQL de personalización y ciclo](supabase/alea_personalizacion_y_ciclo.sql) en el SQL Editor del proyecto Supabase **de Kelly** (`iqoafinzrqnmyvaqcrqa`). No ejecutes el SQL en los proyectos de Saúl. El script crea `alea_profiles` y `alea_cycle_events` con RLS restringida al dueño de los datos. Ejecuta una sola vez y comprueba el resultado.
+
+El ciclo se guarda solo con consentimiento: inicio del período, síntomas e intimidad opcional. El calendario es **aproximado** y no proporciona predicciones fiables de fertilidad ni sirve como anticonceptivo.
+
+### Catálogo y actualización
+
+ALÉA lista comercios de Panamá e identifica referencias de productos reales. Las imágenes externas son orientativas: el empaque puede variar. `scripts/actualizar_catalogo.py` revisa páginas públicas con respeto a `robots.txt`. El flujo [Verificar precios y stock](.github/workflows/alea-catalogo.yml) corre dos veces al día cuando GitHub Actions lo permita.
+
+**Solo se presenta precio** si la ficha de la tienda declara precio y disponibilidad `InStock` y la verificación tiene menos de 48 h. Si no existe dato reciente confiable, no se inventan existencias y se ofrece el enlace para comprobar en el comercio. Esto no es una integración con inventario en tiempo real de todas las tiendas; para cubrir todo el catálogo se requieren feeds o API oficiales y permisos comerciales.
+
+### Pruebas antes de lanzamiento
+
+- Crear cuenta, confirmar email y cerrar/iniciar sesión con otra cuenta.
+- Guardar y recuperar preferencias con `alea_profiles` y confirmar que otra cuenta no puede acceder a ellas.
+- Registrar/eliminar eventos íntimos y confirmar su aislamiento mediante RLS.
+- Comprobar instalación PWA desde Chrome y Safari, recarga offline y la función de catálogo.
+- Confirmar un procedimiento de eliminación de cuenta, términos y política de privacidad final antes de producción.
+
+
 ## ✨ ¿Qué es ALÉA?
 
 **ALÉA** es la evolución de **Mi Ritual v0.1**, una aplicación para organizar rutinas de rostro, cuerpo, cabello y bienestar. Su nueva puerta de entrada `alea.html` permite instalarla desde un navegador compatible, con icono propio y aspecto de aplicación.

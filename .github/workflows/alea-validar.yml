@@ -1,0 +1,34 @@
+name: ALÉA · Validar código
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Revisar scripts y manifiesto
+        shell: bash
+        run: |
+          node --check alea-pro.js
+          node --check sw.js
+          node --check alea-config.js
+          python -m py_compile scripts/actualizar_catalogo.py
+          python -m json.tool manifest.webmanifest >/dev/null
+          python -m json.tool data/ofertas.json >/dev/null
+          python - <<'PY'
+          import pathlib
+          html=pathlib.Path('care.html').read_text()
+          assert 'alea-pro.js' in html, 'No se carga el nuevo módulo'
+          assert 'window.ALEA_SDK=sb;' in html, 'Falta cliente Supabase'
+          assert pathlib.Path('supabase/alea_personalizacion_y_ciclo.sql').exists()
+          assert 'location.replace' in pathlib.Path('index.html').read_text()
+          print('ALÉA estructura correcta')
+          PY
