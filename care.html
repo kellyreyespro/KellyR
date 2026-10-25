@@ -21,7 +21,7 @@
 </div>
 <script src="./alea-config.js"></script><script type="module">
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-const cfg=window.ALEA_SUPABASE||null;const connected=!!(cfg?.url&&cfg?.publishableKey);const sb=connected?createClient(cfg.url,cfg.publishableKey):null;
+const cfg=window.ALEA_SUPABASE||null;const connected=!!(cfg?.url&&cfg?.publishableKey);const sb=connected?createClient(cfg.url,cfg.publishableKey):null;window.ALEA_SDK=sb;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];let user=null,preview=false,register=false,selection='rostro';
 let state={country:'PA',skin:'normal',goal:'hidratacion',periodDate:'',cycleDays:28};
 const catalog={rostro:[['Limpiador facial suave','Para retirar suciedad sin resecar'],['Crema hidratante','Elige según el tipo de piel'],['Protector solar FPS 30+','Uso diario, amplio espectro']],cuerpo:[['Gel de baño suave','Evita fragancias si tu piel es sensible'],['Loción corporal','Ayuda a mantener la hidratación']],cabello:[['Champú suave','Adapta frecuencia al cuero cabelludo'],['Acondicionador','Úsalo según tu tipo de cabello']],intimo:[['Compresas o toallas menstruales','Elige absorción y comodidad'],['Copa menstrual','Verifica uso, higiene y compatibilidad'],['Ropa interior transpirable','Prioriza comodidad e higiene'] ]};
@@ -55,4 +55,4 @@ async function load(){if(!user||!sb)return;const {data,error}=await sb.from('ale
 function sync(){$('#country').value=state.country;$('#countryTag').textContent=countries[state.country]||'🌎';$('#skin').value=state.skin;$('#goal').value=state.goal;$('#periodDate').value=state.periodDate;$('#cycleDays').value=state.cycleDays}
 async function persist(){if(!sb||!user)return;const {error}=await sb.from('alea_preferences').upsert({user_id:user.id,country:state.country,skin:state.skin,goal:state.goal,period_date:state.periodDate||null,cycle_days:state.cycleDays},{onConflict:'user_id'});if(error)alert('No se pudo guardar: '+error.message)}
 sync();if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.warn));
-</script><script>if("serviceWorker" in navigator){navigator.serviceWorker.addEventListener("controllerchange",()=>{if(!sessionStorage.getItem("alea-updated")){sessionStorage.setItem("alea-updated","1");location.reload()}})}</script></body></html>
+</script><script>if("serviceWorker" in navigator){navigator.serviceWorker.addEventListener("controllerchange",()=>{if(!sessionStorage.getItem("alea-updated")){sessionStorage.setItem("alea-updated","1");location.reload()}})}</script><script src="./alea-pro.js" defer></script></body></html>
