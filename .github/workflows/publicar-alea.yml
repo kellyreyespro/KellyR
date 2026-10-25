@@ -1,4 +1,4 @@
-name: Publicar ALÉA v0.1
+name: Publicar ALÉA
 on:
   push:
     branches: [main]
@@ -17,7 +17,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p dist/ALÉA-v0.1
-          cp index.html alea.html manifest.webmanifest sw.js alea-icon.svg alea-logo.svg README.md dist/ALÉA-v0.1/
+          cp care.html alea-config.js alea.html manifest.webmanifest sw.js alea-icon.svg alea-logo.svg README.md dist/ALÉA-v0.1/
           cd dist
           zip -r ALÉA-v0.1.zip ALÉA-v0.1
       - name: Publicar GitHub Release
@@ -28,5 +28,5 @@ jobs:
           if gh release view v0.1.0 >/dev/null 2>&1; then
             gh release upload v0.1.0 dist/ALÉA-v0.1.zip --clobber
           else
-            gh release create v0.1.0 dist/ALÉA-v0.1.zip --title "ALÉA v0.1" --notes "Primera versión descargable de ALÉA Bienestar Femenino. Esta versión es una aplicación web instalable (PWA), no un APK. Para utilizarla, visita https://kellyreyespro.github.io/KellyR/alea.html y elige instalar desde un navegador compatible. Los archivos del ZIP son el código del sitio."
+            gh release create v0.1.0 dist/ALÉA-v0.1.zip --title "ALÉA v0.1" --notes "Versión de ALÉA centrada en cuidado personal y recomendaciones por país. Esta versión es una aplicación web instalable (PWA), no un APK. Para utilizarla, visita https://kellyreyespro.github.io/KellyR/alea.html y elige instalar desde un navegador compatible. Los archivos del ZIP son el código del sitio."
           fi
