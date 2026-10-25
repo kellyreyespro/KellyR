@@ -1,1 +1,5 @@
-// Clave pública de Supabase, NO usar service_role ni claves secretas.\nwindow.ALEA_SUPABASE = {\n  url: 'https://iqoafinzrqnmyvaqcrqa.supabase.co',\n  publishableKey: '' // Pendiente: copiar clave sb_publishable_... de la cuenta Kelly\n};\n
+// Configuración pública de ALÉA. No añadir claves secretas o service_role.
+window.ALEA_SUPABASE = {
+  url: "https://iqoafinzrqnmyvaqcrqa.supabase.co",
+  publishableKey: "sb_publishable_lCk-YHp6kHbB2NJIMAs9Dw_LQBlrSI8"
+};
