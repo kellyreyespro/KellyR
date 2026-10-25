@@ -1,6 +1,11 @@
 name: ALÉA · Verificar precios y stock
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/alea-catalogo.yml'
+      - 'scripts/actualizar_catalogo.py'
   schedule:
     - cron: '11 7,19 * * *'
 permissions:
