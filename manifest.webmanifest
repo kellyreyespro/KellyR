@@ -1,9 +1,9 @@
 {
-  "id": "./app.html",
+  "id": "./care.html",
   "name": "ALÉA · Bienestar femenino",
   "short_name": "ALÉA",
-  "description": "Tu espacio para organizar rutinas de autocuidado y bienestar.",
-  "start_url": "./app.html",
+  "description": "Cuidado personal, rutinas y productos por país, con seguimiento opcional de fases del ciclo.",
+  "start_url": "./care.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#160b20",
