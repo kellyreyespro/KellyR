@@ -3,7 +3,7 @@
 'use strict';
 const $=s=>document.querySelector(s),el=(tag,cls,txt)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n};
 let answers={country:'PA',face:'mixta',faceSensitive:'no',faceConcerns:[],hair:'liso',thickness:'medio',porosity:'no_se',frizz:'no',scalp:'normal',hairGoals:[],oral:'normal',oralGoals:[],makeup:'no',bodyGoals:[],goals:[],periodProduct:'toallas',budget:'medio',consentCycle:false,notify:false};
-let currentStep=0,initialized=false,demo=false,user=null,client=null,events=[],offers=[],selectedDate=null,calMonth=new Date(),setupComplete=false;
+let currentStep=0,initialized=false,demo=false,user=null,client=null,events=[],offers=[],selectedDate=null,calMonth=new Date(),setupComplete=false,lastUserId=null;const initialAnswers=JSON.stringify(answers);
 const steps=[
 {title:'¿Dónde realizas tus compras?',desc:'Así priorizamos tiendas de tu país.',items:[['País','country',['PA:🇵🇦 Panamá','CO:🇨🇴 Colombia','MX:🇲🇽 México','CR:🇨🇷 Costa Rica','ES:🇪🇸 España','US:🇺🇸 Estados Unidos','OT:🌎 Otro']]]},
 {title:'Conozcamos tu piel',desc:'Responde según cómo se siente la piel de tu rostro.',items:[['Tipo de piel','face',['seca:Seca','grasa:Grasa','mixta:Mixta','normal:Normal','sensible:Sensible','no_se:No lo sé']],['¿Tu piel reacciona con facilidad?','faceSensitive',['si:Sí','no:No','no_se:No lo sé']],['¿Qué deseas mejorar?','faceConcerns',['sequedad:Sequedad','acne:Brotes','manchas:Tono desigual','brillo:Brillo','textura:Textura','proteccion:Protección solar'],true]]},
@@ -15,6 +15,8 @@ const steps=[
 const catalog=[
 {id:'kotex36',title:'Kotex Nocturna Maxi Comfort 36 unidades',cat:'periodo',tags:['toallas'],country:'PA',store:'Súper Xtra',url:'https://www.superxtra.com/protectores-diarios-femeninos-kotex-36-und-multiestilo-regulares/p',why:'Protección menstrual nocturna para quien prefiere toallas.',image:null},
 {id:'sensodyne',title:'Sensodyne Rápido Alivio 100 g',cat:'bucal',tags:['sensible','sensibilidad'],country:'PA',store:'Consultar Súper Xtra',url:'https://www.superxtra.com/cuidado-personal-y-belleza/higiene-bucal',why:'Pasta dental formulada para dientes sensibles; consulta con tu odontólogo si el dolor persiste.',image:'https://mercologo.com/images/thumbnails/2667/2667/detailed/6/SENSODYNE_RAPIDO_ALIVIO.png',reference:true},
+{id:'garnier',title:'Garnier Agua Micelar Todo en 1 400 ml',cat:'rostro',tags:['makeup','sensible'],country:'PA',store:'Farmacias Arrocha',url:'https://arrocha.com/products/agua-micelar-garnier-todo-en-1-400-ml',why:'Desmaquilla y retira impurezas sin frotar; útil para una rutina facial suave.',image:'https://www.garnier.com.mx/-/media/project/loreal/brand-sites/garnier/usa/mx/es-mx/skin-active/agua-micelar-todo-en-1/1.jpg?hash=685A4E74023A21D4DCA9F920CC524613&rev=334ec3a5c9064ccb983deb11b24478c1&w=1200',reference:true},
+{id:'garnieracne',title:'Garnier Anti Acné Agua Micelar 400 ml',cat:'rostro',tags:['acne','grasa','mixta'],country:'PA',store:'Súper Xtra',url:'https://www.superxtra.com/agua-micelar-acido-salicilico-garnier-frasco-400-ml-7509552875416/p',why:'Agua micelar para piel con tendencia a brotes; suspende si produce irritación.',image:'https://lafrancoar.vtexassets.com/arquivos/ids/165178/Agua-Micelar-Garnier-Acido-Salicilico-400ml.jpg?v=638876010904600000',reference:true},
 {id:'listerine',title:'Listerine Total Care 500 ml',cat:'bucal',tags:['higiene','aliento'],country:'PA',store:'Súper Xtra',url:'https://www.superxtra.com/listerine-total-care-12x500-ml-7702035833839/p',why:'Enjuague para complementar el cepillado, no lo reemplaza.',image:'https://static.beautytocare.com/cdn-cgi/image/width%3D1600%2Cheight%3D1600%2Cf%3Dauto/media/catalog/product/l/i/listerine-total-care-mouthwash-500ml.jpg',reference:true}
 ];
 const stores=[
@@ -108,7 +110,7 @@ function renderRecs(){
 let r=$('#alea-smart-recs');if(!r)return;r.replaceChildren();
 let bar=el('div','as-panel');bar.append(text('h3','Tu cuidado personalizado ✨'),text('p','Piel '+answers.face+' · cabello '+answers.hair+' · objetivo '+(answers.goals?.join(', ')||'cuidado integral')));bar.append(btn('Editar mi cuestionario',()=>{currentStep=0;renderWizard()},'as-chip'));r.append(bar);
 for(const p of selectedSuggestions()){let card=el('div','as-panel');card.append(text('strong',p.title),text('p',p.benefit));r.append(card)}
-let products=catalog.filter(p=>answers.country==='PA'&&p.cat==='bucal'&&(answers.oral==='sensible'&&p.id==='sensodyne'||p.id==='listerine'));if(products.length){r.append(text('div','Productos encontrados en comercios:','as-label'));products.forEach(p=>r.append(renderOffer(p)))}
+let products=catalog.filter(p=>answers.country==='PA'&&(p.id==='garnier'&&answers.makeup!=='no'||p.id==='garnieracne'&&(answers.faceConcerns||[]).includes('acne')||p.id==='sensodyne'&&answers.oral==='sensible'||p.id==='listerine'&&(answers.oralGoals||[]).includes('aliento')));if(products.length){r.append(text('div','Productos encontrados en comercios:','as-label'));products.forEach(p=>r.append(renderOffer(p)))}
 r.append(text('p','Las recomendaciones son orientativas: evita productos que te causen reacción y consulta a profesionales si hay síntomas persistentes.','as-note'));
 }
 function renderStore(){
@@ -134,9 +136,16 @@ let notice=el('div','as-warning');notice.id='alea-smart-notice';notice.hidden=tr
 let profile=$('#perfil .card');if(profile)profile.append(btn('Editar mi cuestionario',()=>{currentStep=0;renderWizard()},'outline wide'));
 const nav=$('.nav');if(nav){let link=btn('🌸 Ciclo',()=>{document.querySelector('[data-page="ciclo"]')?.click();},'pill');link.style.cssText='position:fixed;right:16px;bottom:88px;z-index:12;box-shadow:0 4px 15px #0002';document.querySelector('.wrap').append(link)}
 }
-async function enhance(){mount();renderRecs();renderStore();renderCycle()}
+function renderHome(){
+const host=$('#inicio .hero');if(!host)return;let existing=$('#alea-home-pro');if(existing)existing.remove();
+let box=el('div','as-panel');box.id='alea-home-pro';let stats=cycleStats();
+if(stats&&isPositive('consentCycle')){box.append(text('strong','🌷 Cuidado para tu fase del ciclo'));box.append(text('p',stats.remaining<=4?'Se acerca la fecha estimada de tu período. Prepara '+answers.periodProduct+' y revisa opciones en tu país.':'Tus registros de ciclo son optativos; puedes consultarlos sin cambiar tu rutina personal.'));if(stats.remaining<=4&&isPositive('notify'))box.append(text('div','Aviso personal de ALÉA: prepara tus productos favoritos.','as-warning'));}
+else box.append(text('p','Completa el cuestionario para crear tus recomendaciones, sin necesidad de registrar datos menstruales.'));
+box.append(btn('Editar mi cuestionario',()=>{currentStep=0;renderWizard()},'as-chip'));host.after(box);
+}
+async function enhance(){mount();renderRecs();renderStore();renderCycle();renderHome()}
 async function start(){
-if(!$('#app')||$('#app').classList.contains('hidden'))return;client=window.ALEA_SDK||null;demo=!client;
+if(!$('#app')||$('#app').classList.contains('hidden'))return;client=window.ALEA_SDK||null;const who=await getUser();demo=!who;if(who?.id!==lastUserId){answers=JSON.parse(initialAnswers);events=[];setupComplete=false;lastUserId=who?.id||null}
 await readProfile();await loadOffers();await loadEvents();saveLocalCycle();enhance();
 if(!setupComplete){currentStep=0;renderWizard()}
 }
