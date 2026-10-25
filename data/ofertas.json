@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "price": 10.25,
+    "currency": "USD",
+    "available": true,
+    "product_id": "garnier",
+    "checked_at": "2026-10-25T23:51:30.171285+00:00",
+    "source_url": "https://arrocha.com/products/agua-micelar-garnier-todo-en-1-400-ml"
+  },
+  {
+    "price": 8.25,
+    "currency": "USD",
+    "available": true,
+    "product_id": "hairfood",
+    "checked_at": "2026-10-25T23:51:30.171285+00:00",
+    "source_url": "https://arrocha.com/products/garnier-shampoo-para-rizos-hair-food-manteca-de-cacao-300ml"
+  },
+  {
+    "price": 9.75,
+    "currency": "USD",
+    "available": true,
+    "product_id": "pantenerizos",
+    "checked_at": "2026-10-25T23:51:30.171285+00:00",
+    "source_url": "https://arrocha.com/products/pantene-shampoo-rizos-definidos-400ml"
+  }
+]
