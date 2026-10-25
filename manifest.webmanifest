@@ -1,20 +1,20 @@
 {
-  "id": "./alea.html",
-  "name": "ALÉA | Autocuidado y bienestar",
+  "id": "./app.html",
+  "name": "ALÉA · Bienestar femenino",
   "short_name": "ALÉA",
   "description": "Tu espacio para organizar rutinas de autocuidado y bienestar.",
-  "start_url": "./alea.html",
+  "start_url": "./app.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#160b20",
-  "theme_color": "#22112e",
+  "theme_color": "#74449e",
   "lang": "es",
   "icons": [
     {
       "src": "./alea-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
