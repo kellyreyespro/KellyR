@@ -12,7 +12,9 @@ from pathlib import Path
 USER_AGENT="ALEA-Wellness-Catalog/0.2 (+https://github.com/kellyreyespro/KellyR)"
 SOURCES=[
  {"product_id":"kotex36","url":"https://www.superxtra.com/protectores-diarios-femeninos-kotex-36-und-multiestilo-regulares/p"},
- {"product_id":"listerine","url":"https://www.superxtra.com/listerine-total-care-12x500-ml-7702035833839/p"}
+ {"product_id":"listerine","url":"https://www.superxtra.com/listerine-total-care-12x500-ml-7702035833839/p"},
+ {"product_id":"garnier","url":"https://arrocha.com/products/agua-micelar-garnier-todo-en-1-400-ml"},
+ {"product_id":"garnieracne","url":"https://www.superxtra.com/agua-micelar-acido-salicilico-garnier-frasco-400-ml-7509552875416/p"}
 ]
 class Page(HTMLParser):
  def __init__(self):
