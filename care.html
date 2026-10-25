@@ -19,7 +19,7 @@
  <section class="screen" id="perfil"><h1>Mi perfil</h1><div class="card"><b id="accountName">Exploración sin cuenta</b><p class="muted small" id="accountInfo">Demostración: los datos no se guardan.</p><label class="field">Mi país<select id="country"><option value="PA">🇵🇦 Panamá</option><option value="CO">🇨🇴 Colombia</option><option value="MX">🇲🇽 México</option><option value="CR">🇨🇷 Costa Rica</option><option value="ES">🇪🇸 España</option><option value="US">🇺🇸 Estados Unidos</option><option value="OT">🌎 Otro país</option></select></label><p class="muted small">Las sugerencias son por tipo de producto. No se presentan precios ni existencias sin verificar.</p><button class="outline wide" id="logout">Salir</button></div></section>
  <nav class="nav"><button class="active" data-page="inicio"><span>⌂</span>Inicio</button><button data-page="rutina"><span>✿</span>Mi rutina</button><button data-page="productos"><span>▦</span>Productos</button><button data-page="perfil"><span>♙</span>Perfil</button></nav>
 </div>
-<script type="module">
+<script src="./alea-config.js"></script><script type="module">
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const cfg=window.ALEA_SUPABASE||null;const connected=!!(cfg?.url&&cfg?.publishableKey);const sb=connected?createClient(cfg.url,cfg.publishableKey):null;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];let user=null,preview=false,register=false,selection='rostro';
