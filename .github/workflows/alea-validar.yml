@@ -1,5 +1,7 @@
 name: ALÉA · Validar código
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -18,6 +20,9 @@ jobs:
         shell: bash
         run: |
           node --check alea-pro.js
+          node --check alea-cycle.js
+          node --test tests/cycle.test.cjs
+          python -m unittest discover -s tests -v
           node --check sw.js
           node --check alea-config.js
           python -m py_compile scripts/actualizar_catalogo.py

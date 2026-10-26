@@ -5,7 +5,7 @@ mediante datos estructurados. Respeta robots.txt y no inventa datos.
 import json, datetime, re, time
 from html.parser import HTMLParser
 from urllib.request import Request, urlopen
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 from urllib.robotparser import RobotFileParser
 from pathlib import Path
 
@@ -32,7 +32,9 @@ def fetch(url):
  u=urlparse(url);robots=u.scheme+"://"+u.netloc+"/robots.txt"
  rp=RobotFileParser()
  try:
-  rp.set_url(robots);rp.read()
+  rp.set_url(robots)
+  with urlopen(Request(robots,headers={"User-Agent":USER_AGENT}),timeout=12) as response:
+   rp.parse(response.read(200_000).decode("utf-8","replace").splitlines())
   if not rp.can_fetch(USER_AGENT,url):return None
  except Exception:return None
  with urlopen(Request(url,headers={"User-Agent":USER_AGENT,"Accept":"text/html"}),timeout=12) as r:
@@ -45,21 +47,38 @@ def walk(obj):
   yield obj
   for k,v in obj.items():
    if k in ("@graph","hasVariant","offers","mainEntity","itemListElement"):yield from walk(v)
-def get_offer(raw):
+def get_offer(raw, source_url=""):
  h=Page();h.feed(raw)
  for snippet in h.scripts:
   try:root=json.loads(snippet)
   except (ValueError,TypeError):continue
-  for thing in walk(root):
-   availability=str(thing.get("availability","")).lower()
-   if "instock" not in availability or "outofstock" in availability:continue
-   value=thing.get("price");currency=thing.get("priceCurrency","USD")
-   if not value and isinstance(thing.get("priceSpecification"),dict):value=thing["priceSpecification"].get("price")
-   try:
-    price=float(str(value).replace(",","").replace("$",""))
-    if not 0<price<10000:continue
-   except (TypeError,ValueError):continue
-   return {"price":round(price,2),"currency":str(currency)[:3],"available":True}
+  for product in walk(root):
+   types=product.get("@type",[])
+   if isinstance(types,str):types=[types]
+   if not any(str(t).rsplit("/",1)[-1]=="Product" for t in types):continue
+   identity=product.get("url") or product.get("@id")
+   if source_url and isinstance(identity,str) and not identity.startswith("#"):
+    actual=urlparse(urljoin(source_url,identity));expected=urlparse(source_url)
+    if actual.hostname!=expected.hostname or actual.path.rstrip("/")!=expected.path.rstrip("/"):continue
+   image=product.get("image")
+   if isinstance(image,list):image=next(iter(image),None)
+   if isinstance(image,dict):image=image.get("url") or image.get("contentUrl")
+   image=urljoin(source_url,image) if isinstance(image,str) else None
+   if image and urlparse(image).scheme!="https":image=None
+   for thing in walk(product.get("offers",[])):
+    availability=str(thing.get("availability","")).rstrip("/").rsplit("/",1)[-1]
+    if availability!="InStock":continue
+    value=thing.get("price");currency=thing.get("priceCurrency")
+    if value is None and isinstance(thing.get("priceSpecification"),dict):
+     spec=thing["priceSpecification"];value=spec.get("price");currency=currency or spec.get("priceCurrency")
+    if currency not in ("USD","PAB"):continue
+    try:
+     price=float(str(value).replace(",","").replace("$",""))
+     if not 0<price<10000:continue
+    except (TypeError,ValueError):continue
+    result={"price":round(price,2),"currency":currency,"available":True}
+    if image:result["image_url"]=image
+    return result
  return None
 def main():
  now=datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -67,7 +86,7 @@ def main():
  for entry in SOURCES:
   try:
    html=fetch(entry["url"])
-   result=get_offer(html) if html else None
+   result=get_offer(html,entry["url"]) if html else None
    if result:out.append({**result,"product_id":entry["product_id"],"checked_at":now,"source_url":entry["url"]})
   except Exception as exc:print(entry["product_id"],type(exc).__name__)
   time.sleep(2)

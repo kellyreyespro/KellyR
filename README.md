@@ -22,7 +22,7 @@ El ciclo se guarda solo con consentimiento: inicio del período, síntomas e int
 
 ALÉA lista comercios de Panamá e identifica referencias de productos reales. Las imágenes externas son orientativas: el empaque puede variar. `scripts/actualizar_catalogo.py` revisa páginas públicas con respeto a `robots.txt`. El flujo [Verificar precios y stock](.github/workflows/alea-catalogo.yml) corre dos veces al día cuando GitHub Actions lo permita.
 
-**Solo se presenta precio** si la ficha de la tienda declara precio y disponibilidad `InStock` y la verificación tiene menos de 48 h. Si no existe dato reciente confiable, no se inventan existencias y se ofrece el enlace para comprobar en el comercio. Esto no es una integración con inventario en tiempo real de todas las tiendas; para cubrir todo el catálogo se requieren feeds o API oficiales y permisos comerciales.
+**Solo se presenta precio** si la ficha de la tienda declara precio y disponibilidad `InStock` y la verificación tiene menos de 24 h. Si no existe dato reciente confiable, no se inventan existencias y se ofrece el enlace para comprobar en el comercio. Esto no es una integración con inventario en tiempo real de todas las tiendas; para cubrir todo el catálogo se requieren feeds o API oficiales y permisos comerciales.
 
 ### Pruebas antes de lanzamiento
 
@@ -80,3 +80,37 @@ Soy **Kelly Reyes**, estudiante de Informática y futura desarrolladora de softw
 ---
 
 <div align="center">💜 **ALÉA · Primera versión instalable**</div>
+
+
+## Desarrollo e interfaz de bienestar
+
+Ejecuta `python3 -m http.server 8000 --bind 127.0.0.1` desde la raíz y abre `care.html` en tu navegador local. No requiere instalar dependencias. La demostración funciona aunque el SDK externo de Supabase no se pueda cargar. Sus respuestas y eventos se mantienen en memoria durante la sesión y se descartan al salir; las cuentas usan las tablas privadas existentes.
+
+La interfaz incluye inicio con registro de ánimo, cuestionario de objetivos, rutinas por categoría y calendario. El consentimiento del diario es opcional. Los recordatorios se muestran **dentro de la aplicación**; no hay notificaciones push en segundo plano. Las fechas futuras y ventanas del ciclo son aproximadas, no confirman fertilidad. Los cinco días de color a partir del inicio registrado son ilustrativos, no una duración medida. Si pasa la fecha prevista sin otro registro, se informa del desfase en lugar de reiniciar silenciosamente la cuenta.
+
+El actualizador de catálogo comprueba las fichas individuales configuradas de Xtra y Arrocha, respeta robots.txt con timeout y admite ofertas JSON-LD de tipo Product, precio positivo, moneda USD/PAB y disponibilidad exacta InStock. Extrae la imagen del mismo producto cuando existe. Los precios desaparecen de la interfaz tras 24 horas, y el cliente vuelve a consultar el catálogo cada cinco minutos mientras está abierto. Los enlaces de las otras tiendas son puntos de consulta: **no son integraciones de inventario**. Las imágenes previas a la verificación son referencias, y no se inventan precios para completar tarjetas.
+
+El flujo GitHub Actions existente se programa dos veces al día; debe estar habilitado y sus ejecuciones deben completarse para renovar los datos. No garantiza stock instantáneo ni stock por sucursal. Las fuentes sin acceso, sin permiso o sin datos estructurados compatibles requieren un feed/API oficial o un adaptador específico verificado antes de poder cubrir todo el catálogo. Las comprobaciones de red del entorno de desarrollo recibieron HTTP 403 del proxy; no se verificó aquí el inventario ni la web de Flo.
+
+Validación del parser: `PYTHONPYCACHEPREFIX=/tmp/alea-pycache python3 -m unittest discover -s tests -v`. Mantén también los controles de `.github/workflows/alea-validar.yml`. Antes de publicar con cuentas reales, verifica Supabase Auth, guardado, borrado y aislamiento de datos entre dos cuentas según las pruebas descritas arriba.
+
+
+## ALÉA 2.0 — experiencia renovada
+
+- Calendario de seis semanas alineado de lunes a domingo, selección por fecha y pestañas de calendario, registros y tendencias. El color distingue sangrado anotado, duración habitual y estimación futura. La duración habitual del ciclo y del período se puede ajustar desde «Mi ritmo».
+- Diario con registro de flujo, síntomas, ánimo e intimidad opcional. No se admite guardar fechas futuras. Los registros se pueden quitar por fecha y exportar desde Perfil como un archivo privado. Los intervalos del historial se muestran sin convertirlos en diagnósticos.
+- Productos con fotografías grandes, ampliación, detalle, favoritos, búsqueda sin distinción de acentos, categorías, orden por precio verificado y filtro de fichas recientes. Las fotos remotas no disponibles se identifican explícitamente; las ilustraciones decorativas propias no se presentan como fotos comerciales.
+- Rutinas de mañana y noche con pasos que se pueden marcar durante la sesión. No se incluye protector solar en la rutina nocturna ni desmaquillante en la matinal. Los favoritos de cuentas se guardan en las respuestas del perfil; los de demostración se descartan al salir.
+- La cabecera muestra «NUEVA EXPERIENCIA · 2.0» para distinguir la versión nueva de una publicación anterior. El Service Worker usa una caché nueva e incluye los módulos, estilos e ilustraciones.
+
+### Referencias consultadas
+
+Se revisaron la [documentación oficial de drip](https://gitlab.com/bloodyhealth/drip), su [descripción de funciones](https://gitlab.com/bloodyhealth/drip/-/blob/main/metadata/en-US/full_description.txt) y sus [pantallas oficiales](https://gitlab.com/bloodyhealth/drip/-/tree/main/metadata/en-US/images/phoneScreenshots). Sirvieron como referencia para separar calendario, diario y tendencias y distinguir fechas registradas y previstas. ALÉA no copia su código ni usa sus capturas como recursos. Las webs de Flo y Clue recibieron denegación HTTP 403 del proxy; no se afirma haber investigado su versión actual.
+
+### Comprobaciones de esta versión
+
+`node --test tests/cycle.test.cjs` comprueba aritmética de fechas, años bisiestos, ciclos retrasados, requisitos de historial, ventanas estimadas y marcadores. `python3 -m unittest discover -s tests -v` comprueba el parser de ofertas.
+
+La publicación existente del repositorio utiliza el flujo automático **pages build and deployment** de GitHub Pages. Los cambios deben llegar a `main` y ese despliegue debe finalizar; guardar archivos o publicar un snapshot del entorno no actualiza GitHub Pages. El sitio muestra una etiqueta 2.0 y utiliza una nueva versión de caché para facilitar su identificación. Comprueba el resultado del despliegue antes de afirmar que el enlace público ya se actualizó.
+
+Prueba integral en navegador: con Playwright, Chromium y Python disponibles, ejecuta `node tests/browser.cjs` (puedes indicar `CHROMIUM_PATH`). Levanta su propio servidor local, utiliza ofertas simuladas, bloquea servicios externos y verifica recorridos a 390 y 1280 píxeles, caducidad de precios y apertura offline de la PWA. Estas pruebas no validan la base de datos remota ni el stock real.
