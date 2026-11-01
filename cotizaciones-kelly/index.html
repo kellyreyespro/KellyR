@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#211a36" />
+  <meta name="description" content="Cotización de servicios académicos universitarios de Kelly Reyes: monografías B/.60, B/.90 y B/.150, tesis, tesinas y trabajos cortos." />
+  <title>Cotizaciones Académicas | Kelly Reyes</title>
+  <style>
+    :root { --ink:#231c34; --muted:#625d6f; --paper:#f7f5f9; --white:#fff; --violet:#5d3a90; --lav:#f0eafa; --line:#e5dfed; --gold:#a77628; --gold-pale:#fcf4e5; --green:#176e57; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.5 'Segoe UI', Arial, sans-serif; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    .wrap { width:min(1152px, calc(100% - 36px)); margin:22px auto 38px; background:var(--white); box-shadow:0 18px 60px #241b3d12; border:1px solid #eae5f0; border-radius:22px; overflow:hidden; }
+    .header { padding:22px 34px; color:white; background:linear-gradient(105deg,#211a36,#443060 74%,#634479); display:flex; align-items:center; justify-content:space-between; gap:22px; }
+    .identity { display:flex; gap:13px; align-items:center; }
+    .mark { width:49px; height:49px; display:grid; place-items:center; border:1px solid #ffffff5b; background:#ffffff17; border-radius:13px; color:#fff; font-weight:800; font-size:23px; letter-spacing:-1px; }
+    .brand { font:700 21px/1.1 Georgia,'Times New Roman',serif; letter-spacing:.1px; }
+    .descriptor { color:#e2d8ed; font-size:11px; text-transform:uppercase; letter-spacing:2.1px; margin-top:6px; }
+    .head-contact { text-align:right; font-size:12px; color:#e7dcf2; }
+    .head-contact strong { display:block; color:white; font-size:16px; letter-spacing:.2px; }
+    .body { padding:30px 34px 25px; }
+    .eyebrow { text-transform:uppercase; color:var(--violet); font-size:11px; font-weight:800; letter-spacing:2.1px; margin:0 0 8px; }
+    .intro { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-bottom:20px; }
+    h1 { font:700 clamp(25px,3.4vw,36px)/1.14 Georgia,'Times New Roman',serif; letter-spacing:-.7px; margin:0 0 8px; }
+    .sub { color:var(--muted); margin:0; max-width:700px; font-size:13px; }
+    .academic-icon { width:99px; height:88px; flex:none; opacity:.96; }
+    .tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:13px; }
+    .tag { background:#f6f3fa; border:1px solid #e9e3f0; border-radius:100px; padding:5px 10px; font-size:11px; color:#534567; font-weight:650; }
+    .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; }
+    .card { border:1px solid var(--line); background:#fff; border-radius:15px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 4px 14px #211b3308; }
+    .card.featured { border-color:#cdb9a1; box-shadow:0 7px 23px #94703817; }
+    .cardtop { padding:17px 18px 13px; border-bottom:1px solid var(--line); background:linear-gradient(140deg,#fff,#faf8fd); }
+    .featured .cardtop { background:linear-gradient(140deg,#fffaf2,#fff4e5); }
+    .tier { text-transform:uppercase; letter-spacing:1.35px; font-weight:800; font-size:11px; color:var(--violet); }
+    .featured .tier { color:#986a22; }
+    .price { color:var(--ink); font-size:37px; font-weight:800; letter-spacing:-1.4px; line-height:1.12; margin:4px 0; }
+    .price .currency { font-size:18px; font-weight:800; margin-right:3px; }
+    .pagecount { color:#5e5570; font-size:12px; font-weight:700; }
+    .cardbody { padding:14px 18px; flex:1; }
+    .card h2 { margin:0 0 10px; font-size:16px; line-height:1.26; }
+    ul { margin:0; padding:0; list-style:none; }
+    .features li { padding-left:19px; position:relative; font-size:12px; line-height:1.4; margin:0 0 7px; }
+    .features li:before { content:'✓'; position:absolute; left:0; top:0; font-weight:900; color:var(--violet); }
+    .featured .features li:before { color:var(--gold); }
+    .cardbottom { padding:12px 17px 15px; background:#fbfafd; border-top:1px solid var(--line); }
+    .featured .cardbottom { background:#fdf9f2; }
+    .revision { font-size:12px; font-weight:800; margin:0 0 8px; color:#4b346c; }
+    .featured .revision { color:#90621d; }
+    .difference { margin:0 0 13px; color:#51495f; font-size:11px; min-height:48px; line-height:1.45; }
+    .difference strong { color:#2d253b; }
+    .cta { display:flex; justify-content:center; align-items:center; gap:9px; text-align:center; width:100%; min-height:39px; border-radius:9px; padding:10px 8px; background:var(--violet); color:white; text-decoration:none; font-size:12px; font-weight:800; transition:filter .15s,transform .15s; }
+    .featured .cta { background:#815a25; }
+    .cta:hover { filter:brightness(1.12); transform:translateY(-1px); }
+    .cta:focus-visible, .whatsapp:focus-visible { outline:3px solid #8bbfe8; outline-offset:3px; }
+    .cta svg { width:16px; height:16px; flex:none; }
+    .section-title { display:flex; gap:10px; align-items:center; margin:23px 0 11px; }
+    .section-title h2 { font:700 20px/1.25 Georgia,'Times New Roman',serif; margin:0; }
+    .section-title::after { content:''; height:1px; background:var(--line); flex:1; }
+    .extras { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+    .extra { border:1px solid var(--line); border-radius:12px; background:#fdfcff; padding:16px 18px; }
+    .extra-head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+    .extra h3 { font-size:14px; margin:0 0 6px; }
+    .extra .from { font-weight:800; color:var(--violet); font-size:13px; white-space:nowrap; }
+    .extra p { font-size:11.5px; line-height:1.5; color:var(--muted); margin:0; }
+    .extra .line { margin-top:9px; font-size:11.5px; font-weight:650; color:var(--ink); }
+    .extra .line b { color:#62438f; }
+    .extra a { color:#5e3b8c; font-weight:800; }
+    .foot { margin-top:17px; padding:14px 0 0; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:18px; }
+    .conditions { font-size:10.5px; color:var(--muted); max-width:740px; line-height:1.5; }
+    .whatsapp { border-radius:100px; background:var(--green); color:#fff; text-decoration:none; padding:12px 15px; display:inline-flex; gap:7px; align-items:center; font-weight:800; font-size:12px; white-space:nowrap; }
+    .whatsapp svg { width:17px; height:17px; }
+    .lastline { background:#faf9fc; border-top:1px solid var(--line); font-size:10px; color:#746b80; padding:9px 34px; display:flex; justify-content:space-between; gap:12px; }
+    @media(max-width:760px){ .wrap{width:100%;margin:0;border-radius:0;border:none;} .header{padding:18px 20px;} .brand{font-size:19px;} .head-contact{font-size:11px;} .head-contact strong{font-size:13px;} .body{padding:26px 18px 22px;} .academic-icon{width:62px;height:65px;} .cards{grid-template-columns:1fr;gap:15px;} .cardtop{display:flex;justify-content:space-between;align-items:center;gap:10px;} .cardtop>.number{flex:none;text-align:right;} .price{font-size:32px;} .cardbody{padding-bottom:8px;} .features{columns:2;column-gap:19px;} .features li{break-inside:avoid;} .difference{min-height:0;} .extras{grid-template-columns:1fr;} .foot{align-items:stretch;flex-direction:column;} .whatsapp{justify-content:center;} .lastline{padding:10px 18px;} }
+    @media(max-width:410px){ .header{padding:14px 14px;} .identity{gap:8px;} .mark{width:39px;height:39px;font-size:19px;} .brand{font-size:17px;} .descriptor{font-size:8px;letter-spacing:1.1px;} .academic-icon{display:none;} .features{columns:1;} .head-contact{font-size:10px;} .head-contact strong{font-size:12px;} }
+    @media print{ @page{size:A4 landscape;margin:7mm;} body{background:white;font-size:11px;-webkit-print-color-adjust:exact;print-color-adjust:exact;} .wrap{margin:0;width:100%;max-width:none;border:0;box-shadow:none;border-radius:0;} .header{padding:10px 15px;} .mark{width:32px;height:32px;font-size:16px;} .brand{font-size:15px;} .descriptor{font-size:8px;margin-top:2px;} .head-contact{font-size:9px;} .head-contact strong{font-size:11px;} .body{padding:12px 14px 8px;} h1{font-size:23px;margin-bottom:4px;} .intro{margin-bottom:9px;} .eyebrow{font-size:9px;margin-bottom:2px;} .sub{font-size:10px;} .academic-icon{width:66px;height:54px;} .tags{margin-top:7px;gap:4px;} .tag{padding:2px 7px;font-size:9px;} .cards{gap:8px;} .cardtop{padding:9px 12px 7px;} .tier{font-size:9px;} .price{font-size:27px;margin:2px 0;} .price .currency{font-size:14px;} .pagecount{font-size:10px;} .cardbody{padding:8px 12px 5px;} .card h2{font-size:12px;margin-bottom:6px;} .features li{font-size:9.5px;line-height:1.22;margin:0 0 4px;padding-left:14px;} .cardbottom{padding:7px 12px 9px;} .revision{font-size:10px;margin-bottom:4px;} .difference{font-size:9px;min-height:31px;line-height:1.3;margin-bottom:6px;} .cta{padding:5px 6px;min-height:27px;font-size:9.5px;} .cta svg{width:12px;height:12px;} .section-title{margin:11px 0 6px;} .section-title h2{font-size:14px;} .extras{gap:8px;} .extra{padding:9px 12px;} .extra h3{font-size:11px;margin:0 0 2px;} .extra .from{font-size:10px;} .extra p{font-size:9.2px;line-height:1.32;} .extra .line{margin-top:4px;font-size:9.2px;} .foot{margin-top:8px;padding-top:7px;} .conditions{font-size:8px;line-height:1.3;} .whatsapp{font-size:9px;padding:7px 10px;} .whatsapp svg{width:12px;height:12px;} .lastline{padding:5px 14px;font-size:8px;} .card,.extra{break-inside:avoid;} }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="header">
+      <div class="identity"><div class="mark" aria-hidden="true">KR</div><div><div class="brand">Kelly Reyes</div><div class="descriptor">Servicios académicos universitarios</div></div></div>
+      <div class="head-contact">Consultas y cotizaciones<strong>WhatsApp · 6389-2487</strong></div>
+    </header>
+    <div class="body">
+      <section aria-labelledby="cotizaciones">
+        <div class="intro">
+          <div>
+            <p class="eyebrow">Propuesta de servicios · Panamá</p>
+            <h1 id="cotizaciones">Cotizaciones de monografías</h1>
+            <p class="sub">Tres niveles de apoyo académico con la misma extensión. La diferencia está en el alcance de la investigación, las revisiones y el análisis de datos.</p>
+            <div class="tags"><span class="tag">45 a 50 páginas por paquete</span><span class="tag">Entrega escrita en Word o PDF</span><span class="tag">Sin PowerPoint</span></div>
+          </div>
+          <svg class="academic-icon" viewBox="0 0 110 96" fill="none" aria-hidden="true"><circle cx="56" cy="45" r="42" fill="#F5EFFA"/><path d="M18 38 55 21l37 17-37 18-37-18Z" fill="#694795"/><path d="M31 48v22c14 11 34 11 48 0V48" stroke="#694795" stroke-width="4" stroke-linejoin="round"/><path d="M91 38v27" stroke="#AB7C36" stroke-width="4" stroke-linecap="round"/><circle cx="91" cy="70" r="4" fill="#AB7C36"/><path d="M42 65c8-4 17-3 25 0" stroke="#AB7C36" stroke-width="3" stroke-linecap="round"/></svg>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="cardtop"><div><div class="tier">01 · Básico</div><div class="number"><div class="price"><span class="currency">B/.</span>60</div><div class="pagecount">45–50 páginas</div></div></div></div>
+            <div class="cardbody"><h2>Estructura y organización</h2>
+              <ul class="features">
+                <li>Portada e índice general.</li>
+                <li>Introducción y justificación.</li>
+                <li>Objetivos generales y específicos.</li>
+                <li>Organización del planteamiento del problema.</li>
+                <li>Estructura del marco teórico y capítulos.</li>
+                <li>Conclusiones, recomendaciones y bibliografía.</li>
+                <li>Formato académico básico del material entregado.</li>
+                <li>Documento escrito en Word o PDF.</li>
+              </ul>
+            </div>
+            <div class="cardbottom">
+              <p class="revision">Correcciones incluidas: 0</p>
+              <p class="difference"><strong>¿Qué lo diferencia?</strong> Organiza el documento y su estructura, sin investigación adicional ni ajustes posteriores.</p>
+              <a class="cta" target="_blank" rel="noopener noreferrer" href="https://wa.me/50763892487?text=Hola%2C%20Kelly.%20Quiero%20consultar%20el%20paquete%20B%C3%A1sico%20de%20monograf%C3%ADa%20de%20B%2F.60%20%2845%20a%2050%20p%C3%A1ginas%29.">
+                Consultar paquete B/.60 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.94 11.94 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.55 4.2 1.59 6.04L0 24l6.1-1.6A11.92 11.92 0 0 0 12 24h.01C18.63 24 24 18.62 24 12a11.95 11.95 0 0 0-3.5-8.5ZM12 21.98a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.73.98.99-3.63-.24-.37A9.94 9.94 0 0 1 2.03 12c0-5.5 4.48-9.98 9.99-9.98a9.9 9.9 0 0 1 7.06 2.93A9.91 9.91 0 0 1 22 12c0 5.5-4.48 9.98-10 9.98Z"/></svg>
+              </a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="cardtop"><div><div class="tier">02 · Avanzado</div><div class="number"><div class="price"><span class="currency">B/.</span>90</div><div class="pagecount">45–50 páginas</div></div></div></div>
+            <div class="cardbody"><h2>Investigación y revisión</h2>
+              <ul class="features">
+                <li>Todo lo incluido en el Básico.</li>
+                <li>Investigación bibliográfica complementaria.</li>
+                <li>Marco teórico y antecedentes ampliados.</li>
+                <li>Mejoras de redacción y coherencia.</li>
+                <li>Organización de la metodología.</li>
+                <li>Revisión de citas y referencias APA 7.</li>
+                <li>Tablas comparativas, si corresponden.</li>
+                <li>Una corrección a partir de las observaciones del docente.</li>
+              </ul>
+            </div>
+            <div class="cardbottom">
+              <p class="revision">Correcciones incluidas: 1</p>
+              <p class="difference"><strong>¿Qué lo diferencia?</strong> Agrega investigación documental y una ronda de correcciones sobre el mismo trabajo.</p>
+              <a class="cta" target="_blank" rel="noopener noreferrer" href="https://wa.me/50763892487?text=Hola%2C%20Kelly.%20Quiero%20consultar%20el%20paquete%20Avanzado%20de%20monograf%C3%ADa%20de%20B%2F.90%20%2845%20a%2050%20p%C3%A1ginas%29.">Consultar paquete B/.90 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.94 11.94 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.55 4.2 1.59 6.04L0 24l6.1-1.6A11.92 11.92 0 0 0 12 24h.01C18.63 24 24 18.62 24 12a11.95 11.95 0 0 0-3.5-8.5ZM12 21.98a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.73.98.99-3.63-.24-.37A9.94 9.94 0 0 1 2.03 12c0-5.5 4.48-9.98 9.99-9.98a9.9 9.9 0 0 1 7.06 2.93A9.91 9.91 0 0 1 22 12c0 5.5-4.48 9.98-10 9.98Z"/></svg></a>
+            </div>
+          </article>
+          <article class="card featured">
+            <div class="cardtop"><div><div class="tier">03 · Premium</div><div class="number"><div class="price"><span class="currency">B/.</span>150</div><div class="pagecount">45–50 páginas</div></div></div></div>
+            <div class="cardbody"><h2>Investigación de campo y análisis</h2>
+              <ul class="features">
+                <li>Todo lo incluido en el Avanzado.</li>
+                <li>Investigación académica más profunda.</li>
+                <li>Diseño y aplicación acordada de encuestas reales.</li>
+                <li>Tabulación de respuestas auténticas.</li>
+                <li>Gráficos estadísticos y su interpretación.</li>
+                <li>Análisis de resultados, conclusiones y anexos.</li>
+                <li>Revisión de apartados en inglés por profesor de inglés.</li>
+                <li>Dos correcciones a partir de observaciones del docente.</li>
+              </ul>
+            </div>
+            <div class="cardbottom">
+              <p class="revision">Correcciones incluidas: 2</p>
+              <p class="difference"><strong>¿Qué lo diferencia?</strong> Incluye datos reales, gráficos, análisis y revisión especializada del inglés.</p>
+              <a class="cta" target="_blank" rel="noopener noreferrer" href="https://wa.me/50763892487?text=Hola%2C%20Kelly.%20Quiero%20consultar%20el%20paquete%20Premium%20de%20monograf%C3%ADa%20de%20B%2F.150%20%2845%20a%2050%20p%C3%A1ginas%29.">Consultar paquete B/.150 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.94 11.94 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.55 4.2 1.59 6.04L0 24l6.1-1.6A11.92 11.92 0 0 0 12 24h.01C18.63 24 24 18.62 24 12a11.95 11.95 0 0 0-3.5-8.5ZM12 21.98a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.73.98.99-3.63-.24-.37A9.94 9.94 0 0 1 2.03 12c0-5.5 4.48-9.98 9.99-9.98a9.9 9.9 0 0 1 7.06 2.93A9.91 9.91 0 0 1 22 12c0 5.5-4.48 9.98-10 9.98Z"/></svg></a>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section aria-labelledby="otros-servicios">
+        <div class="section-title"><h2 id="otros-servicios">Otros servicios académicos</h2></div>
+        <div class="extras">
+          <div class="extra">
+            <div class="extra-head"><h3>Tesis, tesinas y proyectos</h3><span class="from">Cotización personalizada</span></div>
+            <p><strong>Tesis desde B/.200</strong> · Tesinas desde B/.150 · Anteproyectos, informes de práctica y proyectos de grado según extensión y complejidad.</p>
+            <p class="line"><a target="_blank" rel="noopener noreferrer" href="https://wa.me/50763892487?text=Hola%2C%20Kelly.%20Quiero%20cotizar%20una%20tesis%2C%20tesina%20o%20proyecto%20universitario.">Consultar tesis y tesinas</a></p>
+          </div>
+          <div class="extra">
+            <div class="extra-head"><h3>Tareas y trabajos cortos</h3><span class="from">Desde B/.20–30</span></div>
+            <p>Apoyo en investigaciones breves, tareas escritas y elaboración de gráficos a partir de encuestas reales. Otros trabajos universitarios: B/.20–40, según requisitos.</p>
+            <p class="line"><a target="_blank" rel="noopener noreferrer" href="https://wa.me/50763892487?text=Hola%2C%20Kelly.%20Quiero%20cotizar%20una%20tarea%2C%20investigaci%C3%B3n%20corta%20o%20gr%C3%A1ficas%20de%20encuestas.">Consultar trabajo corto</a></p>
+          </div>
+        </div>
+      </section>
+      <footer class="foot">
+        <div class="conditions"><strong>Condiciones:</strong> Los servicios corresponden a asesoría, organización, investigación de apoyo y revisión con participación del estudiante. Las correcciones cubren observaciones sobre los requisitos originales; cambios de tema se cotizan aparte. Encuestas únicamente con respuestas auténticas y alcance acordado. La entrega es solo del documento escrito, en Word o PDF. No incluye diapositivas ni presentaciones.</div>
+        <a class="whatsapp" target="_blank" rel="noopener noreferrer" href="https://wa.me/50763892487?text=Hola%2C%20Kelly.%20Quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20servicios%20acad%C3%A9micos."><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.94 11.94 0 0 0 12.02 0C5.4 0 .02 5.38.02 12c0 2.12.55 4.2 1.59 6.04L0 24l6.1-1.6A11.92 11.92 0 0 0 12 24h.01C18.63 24 24 18.62 24 12a11.95 11.95 0 0 0-3.5-8.5ZM12 21.98a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.73.98.99-3.63-.24-.37A9.94 9.94 0 0 1 2.03 12c0-5.5 4.48-9.98 9.99-9.98a9.9 9.9 0 0 1 7.06 2.93A9.91 9.91 0 0 1 22 12c0 5.5-4.48 9.98-10 9.98Z"/></svg> Escribir a Kelly</a>
+      </footer>
+    </div>
+    <div class="lastline"><span>Kelly Reyes · Servicios Académicos Universitarios</span><span>WhatsApp: +507 6389-2487</span></div>
+  </main>
+</body>
+</html>
